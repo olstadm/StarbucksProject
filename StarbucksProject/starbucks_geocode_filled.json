@@ -7070,5 +7070,18 @@
     "Latitude": 41.884409,
     "Longitude": -87.6236902,
     "Geocode Source": "OSM Nominatim"
+  },
+  {
+    "Store ID": "64930",
+    "Store Number": "64930",
+    "Name": "Soldotna Sterling Hwy",
+    "Street": "43981 Sterling Hwy",
+    "City": "Soldotna",
+    "State": "AK",
+    "Postal Code": "99669",
+    "Country": "US",
+    "Latitude": 60.473182678222656,
+    "Longitude": -151.08572387695312,
+    "Geocode Source": "Manual Entry"
   }
 ]

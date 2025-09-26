@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Soldotna Store Loading</title>
+</head>
+<body>
+    <h1>Testing Soldotna Store Loading</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function testStoreLoading() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                // Load the store data
+                const response = await fetch('starbucks_geocode_filled.json');
+                const storeData = await response.json();
+                
+                // Look for Soldotna store
+                const soldotnaStore = storeData.find(store => 
+                    store["Store ID"] === "64930" || 
+                    store.City === "Soldotna" ||
+                    store.Name?.includes("Soldotna")
+                );
+                
+                // Test coordinate filtering logic
+                function isNorthAmericaCoords(lat, lon) {
+                    const latNum = parseFloat(lat);
+                    const lonNum = parseFloat(lon);
+                    return latNum >= 14 && latNum <= 83 && lonNum >= -180 && lonNum <= -52;
+                }
+                
+                if (soldotnaStore) {
+                    const lat = soldotnaStore.Latitude;
+                    const lon = soldotnaStore.Longitude;
+                    const passesFilter = isNorthAmericaCoords(lat, lon);
+                    
+                    resultsDiv.innerHTML = `
+                        <h2>✅ Soldotna Store Found!</h2>
+                        <p><strong>Store ID:</strong> ${soldotnaStore["Store ID"]}</p>
+                        <p><strong>Name:</strong> ${soldotnaStore.Name}</p>
+                        <p><strong>Address:</strong> ${soldotnaStore.Street}, ${soldotnaStore.City}, ${soldotnaStore.State} ${soldotnaStore["Postal Code"]}</p>
+                        <p><strong>Coordinates:</strong> ${lat}, ${lon}</p>
+                        <p><strong>Passes coordinate filter:</strong> ${passesFilter ? '✅ YES' : '❌ NO'}</p>
+                        <p><strong>Country:</strong> ${soldotnaStore.Country}</p>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <h2>❌ Soldotna Store NOT Found</h2>
+                        <p>Total stores in data: ${storeData.length}</p>
+                    `;
+                }
+                
+                // Also check for any Alaska stores
+                const alaskaStores = storeData.filter(store => 
+                    store.State === "AK" && store.Country === "US"
+                );
+                
+                resultsDiv.innerHTML += `
+                    <h3>Alaska Stores Found: ${alaskaStores.length}</h3>
+                    <ul>
+                        ${alaskaStores.map(store => 
+                            `<li>${store.Name} - ${store.City} (${store.Latitude}, ${store.Longitude})</li>`
+                        ).join('')}
+                    </ul>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<h2>❌ Error loading data: ${error.message}</h2>`;
+                console.error(error);
+            }
+        }
+        
+        // Run the test when page loads
+        testStoreLoading();
+    </script>
+</body>
+</html>
