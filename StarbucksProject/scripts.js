@@ -20,16 +20,45 @@ function initMap() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: ' OpenStreetMap contributors'
     }).addTo(map);
+    
     markers = L.markerClusterGroup({
+        // Improved clustering for better localization
+        maxClusterRadius: function(zoom) {
+            // Increase cluster radius at lower zoom levels for better grouping
+            // At zoom 4 (continent): radius 80px
+            // At zoom 8 (state): radius 40px  
+            // At zoom 12+ (city): radius 20px
+            return zoom <= 6 ? 80 : zoom <= 10 ? 50 : 25;
+        },
+        disableClusteringAtZoom: 15, // Individual markers at city level
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true,
+        removeOutsideVisibleBounds: true, // Performance improvement
+        
         iconCreateFunction: function(cluster) {
             const count = cluster.getChildCount();
-            let className = 'marker-cluster-small';
-            if (count > 10) className = 'marker-cluster-medium';
-            if (count > 50) className = 'marker-cluster-large';
+            let className, size;
+            
+            // Improved visual hierarchy based on cluster size
+            if (count < 5) {
+                className = 'marker-cluster-small';
+                size = 30;
+            } else if (count < 20) {
+                className = 'marker-cluster-medium'; 
+                size = 35;
+            } else if (count < 100) {
+                className = 'marker-cluster-large';
+                size = 40;
+            } else {
+                className = 'marker-cluster-xlarge';
+                size = 45;
+            }
+            
             return L.divIcon({
                 html: `<div><span>${count}</span></div>`,
                 className: `marker-cluster ${className}`,
-                iconSize: L.point(40, 40)
+                iconSize: L.point(size, size)
             });
         }
     });
@@ -56,26 +85,54 @@ async function loadStoreData() {
                 return country === "US" || country === "CA" || country === "MX";
             }
             function isNorthAmericaCoords(lat, lon) {
-                // North America bounds: roughly 14°N to 83°N latitude, -180°W to -50°W longitude
-                // US (including Alaska & Hawaii): 18°N-71°N, -180°W to -65°W
+                // North America bounds updated to properly include Hawaii and Alaska
+                // US Continental: 24°N-49°N, -125°W to -65°W
+                // Alaska: 54°N-71°N, -180°W to -130°W
+                // Hawaii: 18.9°N-22.2°N, -161°W to -154°W
                 // Canada: 42°N-83°N, -141°W to -52°W  
                 // Mexico: 14°N-33°N, -118°W to -86°W
                 const latNum = parseFloat(lat);
                 const lonNum = parseFloat(lon);
-                return latNum >= 14 && latNum <= 83 && lonNum >= -180 && lonNum <= -50;
+                
+                // Check if coordinates are within expanded North American bounds
+                // Latitude: 14°N (Mexico) to 83°N (Northern Canada)
+                // Longitude: -180°W (Alaska/International Date Line) to -52°W (Eastern Canada)
+                return latNum >= 14 && latNum <= 83 && lonNum >= -180 && lonNum <= -52;
             }
             storeData = rawData.filter(entry => {
                 const key = entry["Store Number"] || entry["Store ID"];
                 const lat = getLat(entry);
                 const lon = getLon(entry);
-                if (!isNorthAmerica(entry)) return false;
-                // Must have coordinates
-                if (!key || seen.has(key) || lat === undefined || lon === undefined || lat === "" || lon === "") return false;
-                // Check if coordinates are in North America
-                if (!isNorthAmericaCoords(lat, lon)) {
-                    console.warn(`Store ${entry["Name"]} (${key}) has coordinates outside North America: ${lat}, ${lon} - needs regeocoding`);
+                const state = entry["State/Province"] || entry["State"] || "";
+                const country = entry["Country"] || "";
+                
+                if (!isNorthAmerica(entry)) {
+                    console.log(`Filtered out non-North America store: ${entry["Name"]} in ${country}`);
                     return false;
                 }
+                
+                // Must have coordinates
+                if (!key || seen.has(key) || lat === undefined || lon === undefined || lat === "" || lon === "") {
+                    if (!key) console.log(`Filtered out store with no ID: ${entry["Name"]}`);
+                    else if (seen.has(key)) console.log(`Filtered out duplicate store: ${entry["Name"]} (${key})`);
+                    else console.log(`Filtered out store with missing coordinates: ${entry["Name"]} (${key})`);
+                    return false;
+                }
+                
+                // Check if coordinates are in North America - Updated bounds to include Alaska & Hawaii
+                if (!isNorthAmericaCoords(lat, lon)) {
+                    console.warn(`Store ${entry["Name"]} (${key}) in ${state}, ${country} has coordinates outside North America: ${lat}, ${lon} - this might need attention`);
+                    return false;
+                }
+                
+                // Log Alaska and Hawaii stores for verification
+                if (state === "AK" || state === "Alaska") {
+                    console.log(`✓ Alaska store included: ${entry["Name"]} at ${lat}, ${lon}`);
+                }
+                if (state === "HI" || state === "Hawaii") {
+                    console.log(`✓ Hawaii store included: ${entry["Name"]} at ${lat}, ${lon}`);
+                }
+                
                 seen.add(key);
                 return true;
             }).map(entry => {
