@@ -29,19 +29,68 @@ function initMap() {
 
 async function loadStoreData() {
     try {
-        // Try merged file first
-        let response = await fetch('starbucks_stores_merged.json');
+        // Try geocoded file first
+        let response = await fetch('starbucks_geocode_filled.json');
         if (response.ok) {
             let rawData = await response.json();
-            // Deduplicate by storeNumber or id
+            // Deduplicate by Store Number or Store ID
             const seen = new Set();
             storeData = rawData.filter(entry => {
-                const store = entry.store || entry;
-                const key = store.storeNumber || store.id;
+                const key = entry["Store Number"] || entry["Store ID"];
+                // Must have coordinates
+                if (!key || seen.has(key) || !entry.latitude || !entry.longitude) return false;
+                seen.add(key);
+                return true;
+            }).map(entry => ({
+                store: {
+                    id: entry["Store ID"],
+                    storeNumber: entry["Store Number"],
+                    name: entry["Name"],
+                    address: {
+                        streetAddressLine1: entry["Street"],
+                        city: entry["City"],
+                        countrySubdivisionCode: entry["State"],
+                        postalCode: entry["Postal Code"] || "",
+                        country: entry["Country"]
+                    },
+                    coordinates: {
+                        latitude: parseFloat(entry.latitude),
+                        longitude: parseFloat(entry.longitude)
+                    }
+                }
+            }));
+            populateMap();
+            populateAllStoresModal();
+            return;
+        }
+        // Fallback to merged file
+        response = await fetch('starbucks_stores_merged.json');
+        if (response.ok) {
+            let rawData = await response.json();
+            const seen = new Set();
+            storeData = rawData.filter(entry => {
+                const key = entry["Store Number"] || entry["Store ID"];
                 if (!key || seen.has(key)) return false;
                 seen.add(key);
                 return true;
-            });
+            }).map(entry => ({
+                store: {
+                    id: entry["Store ID"],
+                    storeNumber: entry["Store Number"],
+                    name: entry["Name"],
+                    address: {
+                        streetAddressLine1: entry["Street"],
+                        city: entry["City"],
+                        countrySubdivisionCode: entry["State"],
+                        postalCode: entry["Postal Code"] || "",
+                        country: entry["Country"]
+                    },
+                    coordinates: entry.latitude && entry.longitude ? {
+                        latitude: parseFloat(entry.latitude),
+                        longitude: parseFloat(entry.longitude)
+                    } : undefined
+                }
+            }));
             populateMap();
             populateAllStoresModal();
             return;
