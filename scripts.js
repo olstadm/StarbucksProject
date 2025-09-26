@@ -29,7 +29,25 @@ function initMap() {
 
 async function loadStoreData() {
     try {
-        const response = await fetch('sunday_closed_stores_detailed.json');
+        // Try merged file first
+        let response = await fetch('starbucks_stores_merged.json');
+        if (response.ok) {
+            let rawData = await response.json();
+            // Deduplicate by storeNumber or id
+            const seen = new Set();
+            storeData = rawData.filter(entry => {
+                const store = entry.store || entry;
+                const key = store.storeNumber || store.id;
+                if (!key || seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+            populateMap();
+            populateAllStoresModal();
+            return;
+        }
+        // Fallback to old file
+        response = await fetch('sunday_closed_stores_detailed.json');
         if (response.ok) {
             storeData = await response.json();
             populateMap();
