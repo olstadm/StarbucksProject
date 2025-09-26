@@ -13,6 +13,21 @@
     
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Modal fade and blur animation */
+        .modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(.4,0,.2,1), backdrop-filter 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        .modal.show {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+            backdrop-filter: blur(6px);
+        }
+        .modal:not(.show) {
+            backdrop-filter: blur(0px);
+        }
         :root {
             --starbucks-green: #296044;
             --accent-green: #32734E;
@@ -28,10 +43,63 @@
             padding: 0;
             box-sizing: border-box;
         }
+        /* Modal background blur */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+        }
+        .modal-content-frame {
+            background-color: var(--white);
+            margin: 5% auto;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            box-shadow: 0 8px 32px rgba(41,96,68,0.15);
+            border: 4px solid var(--accent-green);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 10px;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            border-bottom: 2px solid var(--light-green);
+            background: var(--cool-neutral);
+            border-radius: 11px 11px 0 0;
+            margin: -10px -10px 0 -10px;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10;
+        }
+        .close:hover {
+            color: var(--house-green);
+        }
+        .modal-scroll-content {
+            padding: 2rem 2rem 1rem 2rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 56px);
+        }
     </style>
     <header class="header">
-        <h1>Starbucks Store Finder</h1>
-        <p>Find Sunday Closed Starbucks Locations Near You</p>
+    <h1>Starbucks Store Closure Finder</h1>
+    <p>Find Starbucks Stores That Are Closing Permanently Soon</p>
     </header>
 
     <div class="main-container">
@@ -52,9 +120,9 @@
             </div>
             <div id="storesList">
                 <div class="placeholder-card">
-                    <div class="placeholder-icon">🔍</div>
-                    <h3>Search for Stores in Your Area</h3>
-                    <p>Enter a location in the search box above to find nearby Starbucks stores that are closed on Sundays.</p>
+                    <div class="placeholder-icon">⚠️</div>
+                    <h3>Search for Stores Closing Soon</h3>
+                    <p>Enter a location in the search box above to find Starbucks stores near you that are scheduled to close permanently soon.</p>
                 </div>
             </div>
         </div>
@@ -62,10 +130,14 @@
 
     <!-- Modal for All Stores -->
     <div id="storesModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 style="margin-bottom: 2rem; color: var(--house-green);">All Stores by State</h2>
-            <div id="allStoresList"></div>
+        <div class="modal-content-frame">
+            <div class="modal-header">
+                <h2 style=" color: var(--house-green);">All Stores by State</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-scroll-content">
+                <div id="allStoresList"></div>
+            </div>
         </div>
     </div>
 
@@ -73,3 +145,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
     <script src="scripts.js"></script>
+    <script>
+    // Modal fade in/out and click outside to close
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('storesModal');
+        var closeBtn = document.querySelector('.close');
+        // Open modal with fade
+        window.openModal = function() {
+            modal.classList.add('show');
+        };
+        // Close modal with fade
+        window.closeModal = function() {
+            modal.classList.remove('show');
+        };
+        // Click outside to close
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+        // Ensure close button always visible
+        if (closeBtn) {
+            closeBtn.style.position = 'sticky';
+            closeBtn.style.top = '0';
+            closeBtn.style.right = '0';
+            closeBtn.style.zIndex = '10';
+        }
+    });
+    </script>
