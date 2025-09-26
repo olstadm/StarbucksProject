@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find Starbucks stores that are closing permanently soon. Search by city, state, or zip code and view all affected locations on an interactive map.">
+    <title>Starbucks Store Finder - Sunday Closed Locations</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
+    
+    <link rel="stylesheet" href="styles.css">
+
+            <header class="header">
+                        <div class="header-left">
+                            <h1>Starbucks Store Closure Finder</h1>
+                            <p class="header-subtitle">Find Starbucks Stores That Are Closing Permanently Soon</p>
+                            <div class="header-mobile-ad">
+                                <script type="text/javascript">
+                                    atOptions = {
+                                        'key' : 'd40ec3f1c7dc8d84405a38e55c459db2',
+                                        'format' : 'iframe',
+                                        'height' : 50,
+                                        'width' : 320,
+                                        'params' : {}
+                                    };
+                                </script>
+                                <script type="text/javascript" src="//www.highperformanceformat.com/d40ec3f1c7dc8d84405a38e55c459db2/invoke.js"></script>
+                            </div>
+                        </div>
+                        <div class="header-ad desktop-ad">
+                            <script type="text/javascript">
+                                atOptions = {
+                                    'key' : 'b5422917120499b90d0cb3807b878c11',
+                                    'format' : 'iframe',
+                                    'height' : 90,
+                                    'width' : 728,
+                                    'params' : {}
+                                };
+                            </script>
+                            <script type="text/javascript" src="//www.highperformanceformat.com/b5422917120499b90d0cb3807b878c11/invoke.js"></script>
+                        </div>
+                        <div class="header-ad mobile-ad">
+                            <script type="text/javascript">
+                                atOptions = {
+                                    'key' : 'd40ec3f1c7dc8d84405a38e55c459db2',
+                                    'format' : 'iframe',
+                                    'height' : 50,
+                                    'width' : 320,
+                                    'params' : {}
+                                };
+                            </script>
+                            <script type="text/javascript" src="//www.highperformanceformat.com/d40ec3f1c7dc8d84405a38e55c459db2/invoke.js"></script>
+                        </div>
+            </header>
+
+    <div class="main-container">
+        <!-- Map Section -->
+        <div class="map-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for a city, state, or zip code...">
+                <button id="geoLocateBtn" style="margin-top:10px;width:100%;padding:10px 0;border-radius:25px;background:var(--accent-green);color:white;border:none;cursor:pointer;">Use My Location</button>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <!-- Stores List Section -->
+        <div class="stores-section">
+            <div class="stores-header">
+                <h2 class="stores-title">Nearby Stores</h2>
+                <button class="view-all-btn" onclick="window.openModal()">View All Stores</button>
+            </div>
+            <div id="storesList">
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">⚠️</div>
+                    <h3>Search for Stores Closing Soon</h3>
+                    <p>Enter a location in the search box above to find Starbucks stores near you that are scheduled to close permanently soon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for All Stores -->
+    <div id="storesModal" class="modal">
+        <div class="modal-content-frame">
+            <div class="modal-header">
+                <h2 style=" color: var(--house-green);">All Stores by State</h2>
+                <button class="close" onclick="window.closeModal()">&times;</button>
+            </div>
+            <div class="modal-scroll-content">
+                <div id="allStoresList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+    <script src="scripts.js"></script>
