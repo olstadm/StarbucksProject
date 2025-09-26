@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Store Finder - Sunday Closed Locations</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
+    
+    <style>
+        :root {
+            --starbucks-green: #296044;
+            --accent-green: #32734E;
+            --light-green: #D8E8E2;
+            --house-green: #243832;
+            --black: #000000;
+            --warm-neutral: #F2F0EB;
+            --cool-neutral: #F9F9F9;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        <link rel="stylesheet" href="styles.css">
+
+        <div class="main-container">
+            <!-- Map Section -->
+            <div class="map-section">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for a city, state, or zip code...">
+                    <button id="geoLocateBtn" style="margin-top:10px;width:100%;padding:10px 0;border-radius:25px;background:var(--accent-green);color:white;border:none;cursor:pointer;">Use My Location</button>
+                </div>
+                <div id="map"></div>
+            </div>
+
+            <!-- Stores List Section -->
+            <div class="stores-section">
+                <div class="stores-header">
+                    <h2 class="stores-title">Nearby Stores</h2>
+                    <button class="view-all-btn" onclick="openModal()">View All Stores</button>
+                </div>
+                <div id="storesList">
+                    <div class="placeholder-card">
+                        <div class="placeholder-icon">🔍</div>
+                        <h3>Search for Stores in Your Area</h3>
+                        <p>Enter a location in the search box above to find nearby Starbucks stores that are closed on Sundays.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal for All Stores -->
+    <div id="storesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 2rem; color: var(--house-green);">All Stores by State</h2>
+            <div id="allStoresList"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
