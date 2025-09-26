@@ -3,34 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find Starbucks stores that are closing permanently soon. Search by city, state, or zip code and view all affected locations on an interactive map.">
-    <title>Starbucks Store Finder - Sunday Closed Locations</title>
     
-    <!-- Leaflet CSS -->
+    <!-- Primary SEO Meta Tags -->
+    <title>Is My Starbucks Closing? Store Closure Finder & Map 2025</title>
+    <meta name="description" content="Find out if your local Starbucks is closing permanently. Search our comprehensive database of Starbucks store closures by city, state, or ZIP code. Interactive map shows all closing locations across the US.">
+    <meta name="keywords" content="is my starbucks closing, starbucks closures 2025, starbucks stores closing permanently, starbucks closure map, find closing starbucks, starbucks location closure, starbucks shutdown locations">
+    <meta name="author" content="Starbucks Store Closure Finder">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Is My Starbucks Closing? Store Closure Finder & Map">
+    <meta property="og:description" content="Interactive map and search tool to find Starbucks stores that are closing permanently. Search by location to see if your local Starbucks is affected.">
+    <meta property="og:url" content="https://starbucks-closures.com">
+    <meta property="og:site_name" content="Starbucks Store Closure Finder">
+    <meta property="og:image" content="https://starbucks-closures.com/starbucks-closure-map-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Is My Starbucks Closing? Store Closure Finder & Map">
+    <meta name="twitter:description" content="Interactive map showing Starbucks stores closing permanently. Search by city, state, or ZIP code to see if your local Starbucks is affected.">
+    <meta name="twitter:image" content="https://starbucks-closures.com/starbucks-closure-map-preview.jpg">
+    <meta name="twitter:creator" content="@StarbucksClosures">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="theme-color" content="#296044">
+    <link rel="canonical" href="https://starbucks-closures.com/">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Starbucks Store Closure Finder",
+      "description": "Interactive map and search tool to find Starbucks stores that are closing permanently across the United States",
+      "url": "https://starbucks-closures.com",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "Starbucks Store Closure Finder"
+      },
+      "keywords": "starbucks closures, store closures, starbucks locations, coffee shop closures",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Starbucks customers, coffee lovers, local residents"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Is my local Starbucks closing permanently?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use our interactive map and search tool to find out if your local Starbucks is scheduled for permanent closure. Search by city, state, or ZIP code to see closure information for your area."
+        }
+      }, {
+        "@type": "Question", 
+        "name": "How do I find Starbucks stores closing near me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter your city, state, or ZIP code in our search box, or use the 'Use My Location' button to automatically find Starbucks closures in your area. Our map will show all affected stores within 50 miles."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Are these Starbucks closures permanent?",
+        "acceptedAnswer": {
+          "@type": "Answer", 
+          "text": "Yes, all stores listed in our database are scheduled for permanent closure. These are not temporary closures due to renovations or other short-term issues."
+        }
+      }]
+    }
+    </script>
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://tile.openstreetmap.org">
+    <link rel="dns-prefetch" href="//www.highperformanceformat.com">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
-    <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
-    
     <link rel="stylesheet" href="styles.css">
-
-            <header class="header">
-                        <div class="header-left">
-                            <h1>Starbucks Store Closure Finder</h1>
-                            <p class="header-subtitle">Find Starbucks Stores That Are Closing Permanently Soon</p>
-                            <div class="header-mobile-ad">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : 'd40ec3f1c7dc8d84405a38e55c459db2',
-                                        'format' : 'iframe',
-                                        'height' : 50,
-                                        'width' : 320,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//www.highperformanceformat.com/d40ec3f1c7dc8d84405a38e55c459db2/invoke.js"></script>
-                            </div>
-                        </div>
+</head>
+<body>
+    <!-- SEO-friendly header with better content -->
+    <header class="header" role="banner">
+        <div class="header-left">
+            <h1>Is My Starbucks Closing? Store Closure Finder</h1>
+            <p class="header-subtitle">Find Starbucks Stores Closing Permanently - Updated 2025</p>
+            <div class="header-mobile-ad">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'd40ec3f1c7dc8d84405a38e55c459db2',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/d40ec3f1c7dc8d84405a38e55c459db2/invoke.js"></script>
+            </div>
+        </div>
                         <div class="header-ad desktop-ad">
                             <script type="text/javascript">
                                 atOptions = {
@@ -57,31 +152,62 @@
                         </div>
             </header>
 
-    <div class="main-container">
-        <!-- Map Section -->
-        <div class="map-section">
-            <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search for a city, state, or zip code...">
-                <button id="geoLocateBtn" style="margin-top:10px;width:100%;padding:10px 0;border-radius:25px;background:var(--accent-green);color:white;border:none;cursor:pointer;">Use My Location</button>
-            </div>
-            <div id="map"></div>
+    <!-- SEO Content Section -->
+    <section class="intro-content" role="main">
+        <div class="intro-text">
+            <h2>Find Out If Your Local Starbucks is Closing Permanently</h2>
+            <p>Worried about your favorite Starbucks location? Our comprehensive database tracks <strong>Starbucks store closures across the United States</strong>. Simply search by city, state, or ZIP code to discover if your local Starbucks is scheduled for permanent closure.</p>
         </div>
+    </section>
+
+    <main class="main-container" role="application">
+        <!-- Map Section -->
+        <section class="map-section" aria-label="Interactive map of Starbucks store closures">
+            <div class="search-container">
+                <label for="searchInput" class="sr-only">Search for Starbucks closures by location</label>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Enter city, state, or ZIP code to find Starbucks closures..."
+                    aria-label="Search for Starbucks store closures by city, state, or ZIP code"
+                    role="searchbox">
+                <button 
+                    id="geoLocateBtn" 
+                    aria-label="Use your current location to find nearby Starbucks closures"
+                    style="margin-top:10px;width:100%;padding:10px 0;border-radius:25px;background:var(--accent-green);color:white;border:none;cursor:pointer;">
+                    📍 Use My Location to Find Nearby Closures
+                </button>
+            </div>
+            <div id="map" role="img" aria-label="Interactive map showing Starbucks store closure locations"></div>
+        </section>
 
         <!-- Stores List Section -->
-        <div class="stores-section">
+        <aside class="stores-section" role="complementary" aria-label="List of nearby Starbucks store closures">
             <div class="stores-header">
-                <h2 class="stores-title">Nearby Stores</h2>
-                <button class="view-all-btn" onclick="window.openModal()">View All Stores</button>
+                <h2 class="stores-title">Starbucks Closures Near You</h2>
+                <button class="view-all-btn" onclick="window.openModal()" aria-label="View all Starbucks store closures organized by state">
+                    View All Store Closures
+                </button>
             </div>
             <div id="storesList">
                 <div class="placeholder-card">
-                    <div class="placeholder-icon">⚠️</div>
-                    <h3>Search for Stores Closing Soon</h3>
-                    <p>Enter a location in the search box above to find Starbucks stores near you that are scheduled to close permanently soon.</p>
+                    <div class="placeholder-icon" role="img" aria-label="Warning icon">⚠️</div>
+                    <h3>Search for Starbucks Store Closures</h3>
+                    <p>Enter your location above to find Starbucks stores in your area that are <strong>closing permanently</strong>. Our database includes detailed information about each closure including addresses, closure dates, and nearby alternative locations.</p>
+                    <div class="search-tips">
+                        <h4>Search Tips:</h4>
+                        <ul>
+                            <li>Try searching by <strong>city name</strong> (e.g., "Seattle")</li>
+                            <li>Include state for better results (e.g., "Phoenix, AZ")</li>
+                            <li>Use <strong>ZIP codes</strong> for precise local results</li>
+                            <li>Click "Use My Location" for automatic nearby search</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </aside>
+    </main>
 
     <!-- Modal for All Stores -->
     <div id="storesModal" class="modal">
@@ -100,3 +226,84 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
     <script src="scripts.js"></script>
+
+    <!-- FAQ Section for SEO -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions About Starbucks Store Closures</h2>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <h3 itemprop="name">How do I know if my Starbucks is closing permanently?</h3>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div itemprop="text">
+                        <p>Use our search tool above to find out if your local Starbucks is scheduled for permanent closure. Simply enter your city, state, or ZIP code to see all affected stores in your area. Our database is regularly updated with the latest closure information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <h3 itemprop="name">What's the difference between temporary and permanent Starbucks closures?</h3>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div itemprop="text">
+                        <p>Permanent closures mean the Starbucks location will not reopen and is being shut down indefinitely. This is different from temporary closures for renovations, staff shortages, or other short-term issues. All stores in our database are confirmed permanent closures.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <h3 itemprop="name">Why are so many Starbucks locations closing?</h3>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div itemprop="text">
+                        <p>Starbucks closures can result from various factors including changing consumer habits, lease negotiations, underperformance, market saturation, or strategic business decisions. Each closure situation is unique to that location's circumstances.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <h3 itemprop="name">Will I get notified before my local Starbucks closes?</h3>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div itemprop="text">
+                        <p>Starbucks typically provides advance notice to customers before permanently closing a location, usually through in-store signs and sometimes local announcements. However, notification timing can vary. Our tool helps you stay informed about closures in your area.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with additional SEO content -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Why Use Our Starbucks Closure Finder?</h3>
+                <ul class="feature-list">
+                    <li>✅ <strong>Real-time closure information</strong> - Updated database of permanent store closures</li>
+                    <li>✅ <strong>Interactive map view</strong> - See all closing Starbucks locations visually</li>
+                    <li>✅ <strong>Location-based search</strong> - Find closures by city, state, or ZIP code</li>
+                    <li>✅ <strong>Complete coverage</strong> - Includes all US states, Alaska, and Hawaii</li>
+                    <li>✅ <strong>Mobile-friendly</strong> - Works on all devices and screen sizes</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>About This Tool</h3>
+                <p>Our Starbucks Store Closure Finder provides up-to-date information about permanent Starbucks closures across the United States. We track closure announcements and maintain a comprehensive database to help customers find alternative locations.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Coverage & Data Sources</h3>
+                <p>We cover all 50 US states including Alaska and Hawaii, plus Washington DC. Information is compiled from official Starbucks announcements, local news reports, and verified closure confirmations.</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Starbucks Store Closure Finder. This is an independent informational tool and is not affiliated with Starbucks Corporation.</p>
+            <div class="footer-links">
+                <a href="/privacy" rel="nofollow">Privacy Policy</a> | 
+                <a href="/terms" rel="nofollow">Terms of Use</a> | 
+                <a href="/contact" rel="nofollow">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

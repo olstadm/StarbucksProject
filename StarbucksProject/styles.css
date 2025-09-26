@@ -506,7 +506,349 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         .map-section {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                border-right: none;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                    border-right: none;
+                }
+            }
+
+/* SEO Content Styles */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.intro-content {
+    background: var(--white);
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+    border-bottom: 1px solid var(--light-green);
+}
+
+.intro-text h2 {
+    color: var(--house-green);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--house-green);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.key-features {
+    margin-top: 2rem;
+}
+
+.key-features h3 {
+    color: var(--starbucks-green);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.key-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.key-features li {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: var(--house-green);
+    line-height: 1.5;
+}
+
+.search-tips {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--light-green);
+    border-radius: 8px;
+}
+
+.search-tips h4 {
+    color: var(--starbucks-green);
+    margin-bottom: 0.5rem;
+}
+
+.search-tips ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.search-tips li {
+    margin-bottom: 0.3rem;
+    color: var(--house-green);
+}
+
+/* FAQ Section */
+.faq-section {
+    background: var(--cool-neutral);
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faq-container h2 {
+    color: var(--house-green);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faq-item {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item h3 {
+    color: var(--starbucks-green);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.faq-item p {
+    color: var(--house-green);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Footer */
+.footer {
+    background: var(--house-green);
+    color: var(--white);
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: var(--accent-green);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer-section .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section .feature-list li {
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--white);
+}
+
+.footer-section .feature-list li strong {
+    color: var(--accent-green);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--accent-green);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--light-green);
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* Mobile responsiveness for new content */
+@media (max-width: 768px) {
+    /* Header mobile optimization */
+    .header {
+        padding: 1.5rem 1rem;
+        min-height: auto;
+        height: auto;
+    }
+    
+    .header h1 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+        text-align: center;
+    }
+    
+    .header-subtitle {
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+        text-align: center;
+    }
+    /* Streamlined intro for mobile */
+    .intro-content {
+        padding: 1rem;
+        margin-bottom: 0;
+    }
+    
+    .intro-text h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .intro-text p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    /* Main container mobile optimization */
+    .main-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: calc(100vh - 200px);
+    }
+    
+    .map-section {
+        order: 1;
+        min-height: 50vh;
+        padding: 1rem;
+    }
+    
+    .stores-section {
+        order: 2;
+        padding: 1rem;
+        max-height: none;
+    }
+    
+    /* Search container mobile */
+    .search-container {
+        margin-bottom: 0.8rem;
+    }
+    
+    .search-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px 16px;
+    }
+    
+    /* Map mobile optimization */
+    #map {
+        min-height: 300px;
+        height: 40vh;
+        border-radius: 12px;
+    }
+    
+    /* Store cards mobile */
+    .store-card {
+        margin-bottom: 0.8rem;
+        padding: 0.8rem;
+    }
+    
+    .placeholder-card {
+        padding: 1.5rem;
+    }
+    
+    .search-tips {
+        padding: 0.8rem;
+        margin-top: 0.8rem;
+    }
+    
+    .search-tips li {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    /* FAQ mobile optimization */
+    .faq-section {
+        padding: 2rem 1rem;
+    }
+    
+    .faq-item {
+        padding: 1rem;
+    }
+    
+    .faq-item h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Footer mobile optimization */
+    .footer {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-section .feature-list li {
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
+    }
+    
+    /* Modal mobile optimization */
+    .modal-content-frame {
+        width: 95vw;
+        margin: 5vh auto;
+        max-height: 85vh;
+    }
+    
+    .modal-scroll-content {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .intro-content {
+        padding: 0.8rem;
+    }
+    
+    .intro-text h2 {
+        font-size: 1.2rem;
+    }
+    
+    .intro-text p {
+        font-size: 0.9rem;
+    }
+    
+    .map-section, .stores-section {
+        padding: 0.8rem;
+    }
+    
+    #map {
+        height: 35vh;
+        min-height: 250px;
+    }
+    
+    .footer-section .feature-list li {
+        font-size: 0.8rem;
+    }
+}

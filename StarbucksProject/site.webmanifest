@@ -1,0 +1,39 @@
+{
+  "name": "Starbucks Store Closure Finder",
+  "short_name": "Starbucks Closures",
+  "description": "Find Starbucks stores closing permanently near you. Interactive map and search tool.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#296044",
+  "theme_color": "#296044",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "utilities", "navigation"],
+  "lang": "en-US",
+  "orientation": "any",
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-narrow.png", 
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
