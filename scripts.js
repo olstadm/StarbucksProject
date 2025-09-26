@@ -258,6 +258,30 @@ window.onclick = function(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Modal fade in/out and click outside to close
+    var modal = document.getElementById('storesModal');
+    var closeBtn = document.querySelector('.close');
+    // Open modal with fade
+    window.openModal = function() {
+        modal.classList.add('show');
+    };
+    // Close modal with fade
+    window.closeModal = function() {
+        modal.classList.remove('show');
+    };
+    // Click outside to close
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+    // Ensure close button always visible
+    if (closeBtn) {
+        closeBtn.style.position = 'sticky';
+        closeBtn.style.top = '0';
+        closeBtn.style.right = '0';
+        closeBtn.style.zIndex = '10';
+    }
     initMap();
     loadStoreData();
     loadZipData();
