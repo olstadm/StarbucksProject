@@ -238,11 +238,11 @@ function populateAllStoresModal() {
 }
 
 function openModal() {
-    document.getElementById('storesModal').style.display = 'block';
+    document.getElementById('storesModal').classList.add('show');
 }
 
 function closeModal() {
-    document.getElementById('storesModal').style.display = 'none';
+    document.getElementById('storesModal').classList.remove('show');
 }
 
 document.getElementById('searchInput').addEventListener('keypress', function(e) {

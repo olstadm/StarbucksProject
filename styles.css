@@ -1,17 +1,15 @@
 /* Modal fade and blur animation */
 .modal {
+    display: block; /* Always in DOM for animation */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(.4,0,.2,1), backdrop-filter 0.4s cubic-bezier(.4,0,.2,1);
+    backdrop-filter: blur(0px);
 }
 .modal.show {
-    display: block;
     opacity: 1;
     pointer-events: auto;
     backdrop-filter: blur(6px);
-}
-.modal:not(.show) {
-    backdrop-filter: blur(0px);
 }
 .modal-content-frame {
     background-color: var(--white);
