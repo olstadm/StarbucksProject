@@ -237,13 +237,7 @@ function populateAllStoresModal() {
     `).join('');
 }
 
-function openModal() {
-    document.getElementById('storesModal').classList.add('show');
-}
-
-function closeModal() {
-    document.getElementById('storesModal').classList.remove('show');
-}
+// Removed top-level openModal and closeModal; use window.openModal/closeModal defined in DOMContentLoaded
 
 document.getElementById('searchInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
