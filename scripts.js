@@ -35,30 +35,62 @@ async function loadStoreData() {
             let rawData = await response.json();
             // Deduplicate by Store Number or Store ID
             const seen = new Set();
+            function getLat(entry) {
+                return entry.latitude ?? entry.Latitude ?? entry.LATITUDE;
+            }
+            function getLon(entry) {
+                return entry.longitude ?? entry.Longitude ?? entry.LONGITUDE;
+            }
+            // Only include stores in US, CA, MX with North American coordinates
+            function isNorthAmerica(entry) {
+                const country = (entry.Country || "").toUpperCase();
+                return country === "US" || country === "CA" || country === "MX";
+            }
+            function isNorthAmericaCoords(lat, lon) {
+                // North America bounds: roughly 14°N to 83°N latitude, -180°W to -50°W longitude
+                // US (including Alaska & Hawaii): 18°N-71°N, -180°W to -65°W
+                // Canada: 42°N-83°N, -141°W to -52°W  
+                // Mexico: 14°N-33°N, -118°W to -86°W
+                const latNum = parseFloat(lat);
+                const lonNum = parseFloat(lon);
+                return latNum >= 14 && latNum <= 83 && lonNum >= -180 && lonNum <= -50;
+            }
             storeData = rawData.filter(entry => {
                 const key = entry["Store Number"] || entry["Store ID"];
+                const lat = getLat(entry);
+                const lon = getLon(entry);
+                if (!isNorthAmerica(entry)) return false;
                 // Must have coordinates
-                if (!key || seen.has(key) || !entry.latitude || !entry.longitude) return false;
+                if (!key || seen.has(key) || lat === undefined || lon === undefined || lat === "" || lon === "") return false;
+                // Check if coordinates are in North America
+                if (!isNorthAmericaCoords(lat, lon)) {
+                    console.warn(`Store ${entry["Name"]} (${key}) has coordinates outside North America: ${lat}, ${lon} - needs regeocoding`);
+                    return false;
+                }
                 seen.add(key);
                 return true;
-            }).map(entry => ({
-                store: {
-                    id: entry["Store ID"],
-                    storeNumber: entry["Store Number"],
-                    name: entry["Name"],
-                    address: {
-                        streetAddressLine1: entry["Street"],
-                        city: entry["City"],
-                        countrySubdivisionCode: entry["State"],
-                        postalCode: entry["Postal Code"] || "",
-                        country: entry["Country"]
-                    },
-                    coordinates: {
-                        latitude: parseFloat(entry.latitude),
-                        longitude: parseFloat(entry.longitude)
+            }).map(entry => {
+                const lat = getLat(entry);
+                const lon = getLon(entry);
+                return {
+                    store: {
+                        id: entry["Store ID"],
+                        storeNumber: entry["Store Number"],
+                        name: entry["Name"],
+                        address: {
+                            streetAddressLine1: entry["Street"],
+                            city: entry["City"],
+                            countrySubdivisionCode: entry["State"],
+                            postalCode: entry["Postal Code"] || "",
+                            country: entry["Country"]
+                        },
+                        coordinates: {
+                            latitude: parseFloat(lat),
+                            longitude: parseFloat(lon)
+                        }
                     }
-                }
-            }));
+                };
+            });
             populateMap();
             populateAllStoresModal();
             return;
